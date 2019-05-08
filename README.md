@@ -1,2 +1,0 @@
-# EvoPlant
-Created with CodeSandbox
