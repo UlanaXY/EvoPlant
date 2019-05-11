@@ -5,18 +5,18 @@ function pathInstructionsToPath(
   // [angle, lenght]
   path: Array<[number, number]>
 ): string {
-  let lastPoint = origin;
-  const pointPath = path.map(line => {
+  let lastPoint: [number, number] = origin;
+  let resultString: string = origin.join(",");
+  path.forEach(line => {
     const [angle, lenght] = line;
     const x: number = Math.sin(angle) * lenght;
     const y: number = Math.cos(angle) * lenght;
     const end: [number, number] = [lastPoint[0] + x, lastPoint[1] + y];
     lastPoint = end;
-    return end;
+    resultString += " " + end.join(",");
   });
 
-  const a = [origin, ...pointPath.map(point => point.join(","))];
-  return a.join(" ");
+  return resultString;
 }
 
 interface Props {

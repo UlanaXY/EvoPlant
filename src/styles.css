@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  height: 800px;
-  width: 800px;
+  /* height: calc(100vh - 80px); */
+  width: calc(100vw - 60px);
   font-family: sans-serif;
   text-align: center;
   background-color: rgb(20, 20, 20);

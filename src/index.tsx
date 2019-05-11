@@ -42,6 +42,7 @@ const App = () => {
           <OldLine key={kont} origin={[500, 500]} angle={kont} lenght={200} />
         ))}
         <Line origin={[10, 10]} path={[[0, 100], [1.5, 200]]} />
+        <Line origin={[400, 10]} path={[[0, 100], [1.5, 200], [4, 56]]} />
       </svg>
     </div>
   );
