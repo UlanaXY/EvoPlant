@@ -1,15 +1,15 @@
 import * as React from "react";
 import { render } from "react-dom";
-
+import Line from "./components/Line";
 import "./styles.css";
 
-interface Props {
+interface oldProps {
   angle: number;
   lenght: number;
   origin: [number, number];
 }
 
-const Line: React.FC<Props> = ({ angle, origin, lenght }) => {
+const OldLine: React.FC<oldProps> = ({ angle, origin, lenght }) => {
   const x: number = Math.sin(angle) * lenght;
   const y: number = Math.cos(angle) * lenght;
   const end: [number, number] = [origin[0] + x, origin[1] + y];
@@ -25,7 +25,7 @@ const Line: React.FC<Props> = ({ angle, origin, lenght }) => {
 
 const App = () => {
   const test: number[] = [];
-  for (let i: number = 0; i <= 1.5; i += 0.1) {
+  for (let i: number = 0; i <= 0.5; i += 0.1) {
     test.push(i);
   }
 
@@ -39,8 +39,9 @@ const App = () => {
         }}
       >
         {test.map(kont => (
-          <Line key={kont} origin={[0, 0]} angle={kont} lenght={200} />
+          <OldLine key={kont} origin={[500, 500]} angle={kont} lenght={200} />
         ))}
+        <Line origin={[10, 10]} path={[[0, 100], [1.5, 200]]} />
       </svg>
     </div>
   );
