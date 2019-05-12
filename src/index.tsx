@@ -97,6 +97,13 @@ class App extends React.Component<{}, State> {
   processGeneration = async (): Promise<void> => {
     console.log('a', this.iter);
 
+    // mutate;
+    // process;
+    // sort
+    // draw
+    // kill half
+    // replicate
+
     this.iter += 1;
     if (this.iter > 10) {
       this.shouldLoopStop = true;
