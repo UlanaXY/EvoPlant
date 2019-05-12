@@ -1,5 +1,6 @@
-import { specialCodons, codonLength } from "../constants/codonConsts";
-import { bin2dec, seqToCodonArray } from "./utils";
+import {codonLength, specialCodons} from "../constants/codonConsts";
+import {bin2dec, seqToCodonArray} from "./utils";
+
 
 function arrayToInstruction(stringArray: string[]): Array<[number, number]> {
   if (stringArray.length % 2 === 1) {
@@ -15,7 +16,7 @@ function arrayToInstruction(stringArray: string[]): Array<[number, number]> {
   return result;
 }
 
-export default function getInstruction(seq: string) {
+function getInstruction(seq: string): Array<[number, number]> {
   let seqAsArray: string[] = seqToCodonArray(
     seq.slice(seq.indexOf(specialCodons.start) + codonLength)
   );
@@ -31,6 +32,18 @@ export default function getInstruction(seq: string) {
   }
 
   console.log(seqAsArray);
-  const instruction = arrayToInstruction(seqAsArray);
-  return instruction;
+  return arrayToInstruction(seqAsArray);
+}
+
+export function parseSeqToInstruction(seq: string): Array<[number, number]> {
+
+  let result: Array<[number, number]>;
+  try {
+    result = getInstruction(seq);
+  } catch (error) {
+    console.error(error);
+    result = [];
+  }
+  console.log(result);
+  return result;
 }

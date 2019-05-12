@@ -1,4 +1,6 @@
 import * as React from "react";
+import styled from "styled-components";
+
 
 function pathInstructionsToPath(
   origin: [number, number],
@@ -22,15 +24,18 @@ function pathInstructionsToPath(
 interface Props {
   origin: [number, number];
   // [angle, lenght]
-  path: Array<[number, number]>;
+  pathInstructions: Array<[number, number]>;
 }
 
-const Line: React.FC<Props> = ({ origin, path }) => (
-  <polyline
-    points={pathInstructionsToPath(origin, path)}
-    stroke="orange"
-    fill="transparent"
-    stroke-width="5"
+const StyledLine = styled.polyline`
+    stroke: #6fee87;
+    fill: transparent;
+    stroke-width: 5px;
+`;
+
+const Line: React.FC<Props> = ({ origin, pathInstructions }) => (
+  <StyledLine
+    points={pathInstructionsToPath(origin, pathInstructions)}
   />
 );
 
