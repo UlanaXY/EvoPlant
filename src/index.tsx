@@ -2,71 +2,22 @@ import * as React from "react";
 import { render } from "react-dom";
 import PlantGraphicRepresentation from "./components/PlantGraphicRepresentation";
 import Layout from "./components/Layout";
-import { parseSeqToInstruction } from "./helpers/getInstruction";
+import getTestSet from "./helpers/getTestSet"
+import SeqList from "./SeqList";
 import "./styles.css";
 
-const seqArray: string[] = [];
-for (let i = 0; i < 8 * 4; i += 1) {
-  seqArray.push([
-    "001111",
-    "000000",
-    "010000",
-    "001111",
-    "000000",
-    "010000",
-    "001111",
-    "101010",
-    "010000",
-    "001111",
-    "101010",
-    "010000",
-    "111111",
-    "111010",
-    "010000",
-    "000001",
-    "001000",
-    "000000",
-    "100001",
-    "111110",
-    "000000",
-    "000000",
-    "000000",
-    "010000",
-    "001111",
-    "000000",
-    "010000",
-    "001111",
-    "000000",
-    "010000",
-    "001111",
-    "101010",
-    "010000",
-    "001111",
-    "101010",
-    "010000",
-    "001111",
-    "101010",
-    "111111",
-    "010000",
-    "001111",
-    "101010",
-    "111111",
-    "001111",
-    "101010",
-    "111111",
-    "111111"
-  ].join(""))
-}
 interface State {
-  plantsSeq: string[];
+  plantsPaths: Instruction[];
 }
 
 class App extends React.Component<{}, State> {
+  plantsSeq = new SeqList(getTestSet(false));
+
   constructor(props: {}) {
     super(props);
 
     this.state = {
-      plantsSeq: seqArray,
+      plantsPaths: this.plantsSeq.asInstructions()
     }
   }
 
@@ -111,13 +62,14 @@ class App extends React.Component<{}, State> {
   };
 
   render(): React.ReactNode {
+    const { plantsPaths } = this.state;
     return (
       <Layout>
-        {seqArray.map(
-          (seq: string, i: number): React.ReactNode => (
+        {plantsPaths.map(
+          (instruction: Instruction, i: number): React.ReactNode => (
             <PlantGraphicRepresentation
               key={i}
-              instruction={parseSeqToInstruction(seq)}
+              instruction={instruction}
             />
           )
         )}

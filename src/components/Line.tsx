@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 function pathInstructionsToPath(
   origin: Straight,
-  path: Straight[]
+  path: Instruction
 ): string {
   let lastPoint: Point = origin;
   let resultString: string = origin.join(",");
@@ -24,7 +24,7 @@ function pathInstructionsToPath(
 
 interface Props {
   origin: Point;
-  pathInstructions: Straight[];
+  pathInstructions: Instruction;
 }
 
 const StyledLine = styled.polyline`

@@ -3,3 +3,5 @@ type Point = [number, number];
 
 /** [angle, length] */
 type Straight = [number, number];
+
+type Instruction = Straight[];
