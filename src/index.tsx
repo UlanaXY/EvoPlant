@@ -65,8 +65,6 @@ class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
 
-
-
     this.state = {
       plantsSeq: seqArray,
     }
@@ -76,32 +74,32 @@ class App extends React.Component<{}, State> {
   private iter = 0;
 
   componentDidMount(): void {
-    this.loop();
+    this.loop()
+      .then((): void => {
+        console.log('Loop finished');
+      })
+      .catch((error): void =>
+        console.error(error)
+      );
   }
 
-  loop = async (): Promise<void> => {
-    try {
-      console.log('a', this.iter);
+  loop = async (): Promise<boolean> => {
 
+    await this.processGeneration();
 
+    if (!this.shouldLoopStop) {
+      return this.loop();
+    } else {
+      return Promise.resolve(true);
+    }
+  };
 
+  processGeneration = async (): Promise<void> => {
+    console.log('a', this.iter);
 
-
-
-
-
-
-
-      this.iter += 1;
-      if (this.iter > 10) {
-        this.shouldLoopStop = true;
-      }
-
-      if (!this.shouldLoopStop) {
-        await this.loop();
-      }
-    } catch (e) {
-      console.error(e);
+    this.iter += 1;
+    if (this.iter > 10) {
+      this.shouldLoopStop = true;
     }
   };
 
