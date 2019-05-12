@@ -2,11 +2,11 @@ import {codonLength, specialCodons} from "../constants/codonConsts";
 import {bin2dec, seqToCodonArray} from "./utils";
 
 
-function arrayToInstruction(stringArray: string[]): Array<[number, number]> {
+function arrayToInstruction(stringArray: string[]): Straight[] {
   if (stringArray.length % 2 === 1) {
     throw Error("Angle without length");
   }
-  const result: Array<[number, number]> = [];
+  const result: Straight[] = [];
   // let lastAngleOperator;
   // let lastLengthOperator;
   for (let i = 0; i < stringArray.length; i += 2) {
@@ -16,7 +16,7 @@ function arrayToInstruction(stringArray: string[]): Array<[number, number]> {
   return result;
 }
 
-function getInstruction(seq: string): Array<[number, number]> {
+function getInstruction(seq: string): Straight[] {
   let seqAsArray: string[] = seqToCodonArray(
     seq.slice(seq.indexOf(specialCodons.start) + codonLength)
   );
@@ -35,9 +35,9 @@ function getInstruction(seq: string): Array<[number, number]> {
   return arrayToInstruction(seqAsArray);
 }
 
-export function parseSeqToInstruction(seq: string): Array<[number, number]> {
+export function parseSeqToInstruction(seq: string): Straight[] {
 
-  let result: Array<[number, number]>;
+  let result: Straight[];
   try {
     result = getInstruction(seq);
   } catch (error) {

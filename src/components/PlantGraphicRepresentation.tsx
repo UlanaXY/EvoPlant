@@ -9,9 +9,7 @@ const PlantCanvas = styled.svg`
   width: 250px;
 `;
 
-const PlantGraphicRepresentation: React.FC<{
-  instruction: Array<[number, number]>
-}> = ({ instruction }) => {
+const PlantGraphicRepresentation: React.FC<{instruction: Straight[]}> = ({ instruction }) => {
   return (
     <PlantCanvas viewBox="0 0 500 500">
       <Line origin={[250, 0]} pathInstructions={instruction} />

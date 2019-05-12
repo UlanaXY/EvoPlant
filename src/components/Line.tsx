@@ -3,17 +3,16 @@ import styled from "styled-components";
 
 
 function pathInstructionsToPath(
-  origin: [number, number],
-  // [angle, lenght]
-  path: Array<[number, number]>
+  origin: Straight,
+  path: Straight[]
 ): string {
-  let lastPoint: [number, number] = origin;
+  let lastPoint: Point = origin;
   let resultString: string = origin.join(",");
-  path.forEach(line => {
-    const [angle, lenght] = line;
-    const x: number = Math.sin(angle) * lenght;
-    const y: number = Math.cos(angle) * lenght;
-    const end: [number, number] = [lastPoint[0] + x, lastPoint[1] + y];
+  path.forEach((line): void=> {
+    const [angle, length] = line;
+    const x: number = Math.sin(angle) * length;
+    const y: number = Math.cos(angle) * length;
+    const end: Point = [lastPoint[0] + x, lastPoint[1] + y];
     lastPoint = end;
     resultString += " " + end.join(",");
   });
@@ -21,10 +20,11 @@ function pathInstructionsToPath(
   return resultString;
 }
 
+
+
 interface Props {
-  origin: [number, number];
-  // [angle, lenght]
-  pathInstructions: Array<[number, number]>;
+  origin: Point;
+  pathInstructions: Straight[];
 }
 
 const StyledLine = styled.polyline`
